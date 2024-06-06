@@ -87,11 +87,12 @@ MESON_GEN_NINJA := \
 	-Dplatform-sdk-version=$(PLATFORM_SDK_VERSION)                               \
 	-Dgallium-drivers=$(subst $(space),$(comma),$(BOARD_MESA3D_GALLIUM_DRIVERS)) \
 	-Dvulkan-drivers=$(subst $(space),$(comma),$(subst radeon,amd,$(BOARD_MESA3D_VULKAN_DRIVERS)))   \
-	-Dgbm=enabled                                                                \
+	-Dgbm=disabled                                                                \
 	-Degl=$(if $(BOARD_MESA3D_GALLIUM_DRIVERS),enabled,disabled)                 \
 	-Dllvm=$(if $(MESON_GEN_LLVM_STUB),enabled,disabled)                         \
 	-Dcpp_rtti=false                                                             \
 	-Dlmsensors=disabled                                                         \
+	-Dfreedreno-kmds=kgsl							     \
 	-Dandroid-libbacktrace=disabled                                              \
 	$(BOARD_MESA3D_MESON_ARGS)                                                   \
 
