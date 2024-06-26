@@ -27,7 +27,6 @@ pps_freedreno_dep = declare_dependency(
   link_with: [
     pps_freedreno_lib,
     libfreedreno_common,
-    libfreedreno_drm,
     libfreedreno_perfcntrs,
   ],
   dependencies: [
