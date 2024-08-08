@@ -103,10 +103,12 @@ endif
 
 __MY_SHARED_LIBRARIES := $(LOCAL_SHARED_LIBRARIES)
 
+ifneq ($(BOARD_MESA3D_BUILD_LIBGBM),)
 ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 30; echo $$?), 0)
 MESA_LIBGBM_NAME := libgbm_mesa
 else
 MESA_LIBGBM_NAME := libgbm
+endif
 endif
 
 ifeq ($(TARGET_IS_64_BIT),true)
@@ -176,7 +178,7 @@ endif
 $(foreach driver,$(BOARD_MESA3D_VULKAN_DRIVERS), \
     $(eval $(call mesa3d-lib,vulkan.$(MESA_VK_LIB_SUFFIX_$(driver)),hw,MESA3D_VULKAN_$(driver)_BIN)))
 
-ifneq ($(filter true, $(BOARD_MESA3D_BUILD_LIBGBM)),)
+ifneq ($(filter enabled, $(BOARD_MESA3D_BUILD_LIBGBM)),)
 # Modules 'libgbm', produces '/vendor/lib{64}/libgbm.so'
 $(eval $(call mesa3d-lib,$(MESA_LIBGBM_NAME),,MESA3D_LIBGBM_BIN,$(MESA3D_TOP)/src/gbm/main))
 endif
